@@ -11,7 +11,7 @@ const Message = () => {
         className="max-w-2xl bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl text-center"
       >
         <h1 className="text-4xl font-serif font-bold text-gray-800 mb-6 tracking-wide">
-          Dear Madam Ji,
+          Dear Mam,
         </h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -19,9 +19,7 @@ const Message = () => {
           transition={{ duration: 1, delay: 0.6 }}
           className="text-xl text-gray-700 leading-relaxed mb-6"
         >
-          Even though we have met recently & I guess we know nothing about each other, this is my way
-          of showing you how much I value people. This is a start to our friendship, and I hope we’ll
-          create many beautiful memories together.
+          The epitome of beauty and grace, unmatched in the entire world.
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -29,7 +27,7 @@ const Message = () => {
           transition={{ duration: 1, delay: 0.9 }}
           className="text-xl text-gray-700 leading-relaxed mb-6"
         >
-          I'm beginning this new year with a new friend like you, and I hope our friendship lasts forever.
+          On your birthday, I just want to say I'm so lucky to have met you. I hope your day is full of love and happiness.
         </motion.p>
         <p className="text-lg text-purple-600 font-semibold">
           On your special day, I wish you the happiest birthday!
