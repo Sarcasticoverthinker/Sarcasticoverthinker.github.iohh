@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Heart, Sparkles } from 'lucide-react';
 
 const messages = [
-  "Hello Madam Jiiii",
-  "It's Your Special Day Yeyey!",
-  "So, i had to make something special for you cause you are special to me!",
-  "Do you wanna see what I made??"
+  "Hello Khadijah,",
+  "It's Your Special Day, Yeyey!",
+  "I had to make something unforgettable for you, because you are so special to me!",
+  "Do you want to see what I've created just for you?"
 ];
 
 const BirthdayGreeting = () => {
@@ -38,7 +38,7 @@ const BirthdayGreeting = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-300 to-pink-400 flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -48,15 +48,15 @@ const BirthdayGreeting = () => {
             animate={{
               y: '-10vh',
               x: Math.random() * 100 + 'vw',
-              rotate: 360
+              rotate: 360,
             }}
             transition={{
               duration: Math.random() * 10 + 10,
               repeat: Infinity,
-              ease: 'linear'
+              ease: 'linear',
             }}
           >
-            <Heart className="text-pink-300" size={24} />
+            <Heart className="text-pink-200" size={24} />
           </motion.div>
         ))}
       </div>
@@ -97,13 +97,13 @@ const BirthdayGreeting = () => {
                     onClick={handleButtonClick}
                     className="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transform hover:scale-105 transition-all"
                   >
-                    Yes!
+                    Yes! Show me!
                   </button>
                   <button
                     onClick={handleButtonClick}
                     className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-105 transition-all"
                   >
-                    No
+                    No, I'm curious
                   </button>
                 </motion.div>
               )}
@@ -116,9 +116,11 @@ const BirthdayGreeting = () => {
               transition={{ duration: 1, ease: 'easeInOut' }}
               className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center"
             >
-              <p className="text-2xl font-semibold text-gray-800">
-                Have a look at it, Madam Jiii
-              </p>
+              <motion.p
+                className="text-2xl font-semibold text-gray-800 mb-6"
+              >
+                Have a look at it, Khadijah! 🎉✨
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>
