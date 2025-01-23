@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Sparkles } from 'lucide-react';
 import Confetti from 'react-confetti';
-import TypingAnimation from 'react-typing-animation'; // Import typing animation
 import ReactSound from 'react-sound'; // Import sound effects
 
 const messages = [
@@ -86,20 +85,16 @@ const BirthdayGreeting = () => {
               className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center"
             >
               <Sparkles className="inline-block text-purple-400 mb-4" size={32} />
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentMessageIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                  className="text-2xl font-semibold text-purple-800 mb-6"
-                >
-                  <TypingAnimation>
-                    {messages[currentMessageIndex]}
-                  </TypingAnimation>
-                </motion.p>
-              </AnimatePresence>
+              <motion.p
+                key={currentMessageIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.8, ease: 'easeInOut' }}
+                className="text-2xl font-semibold text-purple-800 mb-6"
+              >
+                {messages[currentMessageIndex]}
+              </motion.p>
 
               {showButtons && (
                 <motion.div
@@ -108,18 +103,22 @@ const BirthdayGreeting = () => {
                   transition={{ duration: 0.6, ease: 'easeInOut' }}
                   className="space-x-4"
                 >
-                  <button
+                  <motion.button
                     onClick={handleButtonClick}
                     className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-110 transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     Yes! Show me!
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     onClick={handleButtonClick}
                     className="px-6 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transform hover:scale-110 transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     I'm curious, reveal it!
-                  </button>
+                  </motion.button>
                 </motion.div>
               )}
             </motion.div>
