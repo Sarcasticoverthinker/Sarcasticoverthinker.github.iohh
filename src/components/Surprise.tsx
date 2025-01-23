@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Music, Cake as CakeIcon } from 'lucide-react';
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
-import CatCake from './images/cat-face-cake.jpg'
+import CatCake from './images/cat-face-cake.jpg';
+
 const Surprise = () => {
   const [stage, setStage] = useState(0);
   const [isLit, setIsLit] = useState(false);
@@ -34,8 +35,7 @@ const Surprise = () => {
 
   return (
     <div
-      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-pink-100 to-purple-100' : 'bg-gray-900'
-        }`}
+      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-pink-100 to-purple-100' : 'bg-gray-900'}`}
     >
       {/* Decorative Bulbs */}
       {isLit && (
@@ -133,21 +133,17 @@ const Surprise = () => {
       )}
 
       {/* Control Button Container */}
-      <div className="absolute inset-x-0 flex justify-center items-center px-4 mt-20 py-4">
+      <div className="absolute inset-x-0 flex justify-center items-center px-4 mt-20">
         <motion.button
           onClick={handleClick}
-          className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base text-white font-semibold shadow-lg w-full max-w-sm ${isLit
-              ? 'bg-pink-500 hover:bg-pink-600'
-              : 'bg-blue-500 hover:bg-blue-600'
-            }`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{ transformOrigin: 'center' }}
+          className="bg-pink-500 text-white py-3 px-6 rounded-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           {buttonLabels[stage]}
         </motion.button>
       </div>
-
     </div>
   );
 };
