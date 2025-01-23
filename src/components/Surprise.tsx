@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Music } from 'lucide-react';
-import Banner from './images/banner.png';
-import Musicc from './musicc.mp3';
+import { Music, Cake as CakeIcon } from 'lucide-react';
 import CatCake from './images/cat-face-cake.jpg';
+import Musicc from './musicc.mp3';
+import Confetti from 'react-confetti'; // A library for confetti
 
 const StarryNight = () => {
   const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
@@ -80,22 +80,14 @@ const Surprise = () => {
         }`}
     >
       {/* Starry Night Background */}
-      <StarryNight />
+      {stage >= 2 && <StarryNight />}
 
-      {/* Decorative Bulbs */}
-      {isLit && (
-        <div className="absolute top-4 left-0 right-0 flex justify-around">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="w-4 h-4 rounded-full animate-pulse"
-              style={{
-                backgroundColor: ['#ff0000', '#00ff00', '#0000ff', '#ffff00'][i % 4],
-                animation: `pulse 1s ease-in-out infinite ${i * 0.2}s`,
-              }}
-            />
-          ))}
-        </div>
+      {/* Confetti on Cake Cut */}
+      {stage >= 4 && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
       )}
 
       {/* Happy Birthday Message */}
@@ -107,45 +99,15 @@ const Surprise = () => {
           className="absolute inset-0 flex justify-center items-start mt-40"
         >
           <img
-            src={Banner}
+            src={CatCake}
             className="w-full max-w-xs md:max-w-md h-auto mt-10 pt-10"
             alt="Happy Birthday"
           />
         </motion.h1>
       )}
 
-      {/* Flying Balloons */}
+      {/* Cake Animation */}
       {stage >= 4 && (
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute"
-              initial={{ bottom: '-10vh', left: `${Math.random() * 100}vw` }}
-              animate={{
-                bottom: '120vh',
-                left: `${Math.random() * 100}vw`,
-              }}
-              transition={{
-                duration: 10 + Math.random() * 5,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
-            >
-              <div
-                className="w-6 md:w-8 h-8 md:h-12 rounded-t-full"
-                style={{
-                  backgroundColor: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'][i % 4],
-                }}
-              />
-              <div className="w-0.5 h-12 md:h-16 bg-gray-400 mx-auto" />
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      {/* Cake */}
-      {stage >= 5 && (
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -153,11 +115,10 @@ const Surprise = () => {
           className="absolute flex justify-center items-center w-full"
           style={{ top: '50%' }}
         >
-          <img
-            src={CatCake}
-            className="w-full max-w-xs md:max-w-md h-auto mt-10 pt-10"
-            alt="Cat Cake"
-          />
+          {/* Cake Animation */}
+          <div className="w-40 h-40 rounded-lg bg-gradient-to-t from-yellow-400 via-yellow-300 to-yellow-200 shadow-lg flex items-center justify-center">
+            <CakeIcon className="w-20 h-20 text-white" />
+          </div>
         </motion.div>
       )}
 
@@ -192,7 +153,6 @@ const Surprise = () => {
           {buttonLabels[stage]}
         </motion.button>
       </div>
-
     </div>
   );
 };
