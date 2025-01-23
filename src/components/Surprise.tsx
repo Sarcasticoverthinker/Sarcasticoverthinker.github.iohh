@@ -1,10 +1,51 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Music, Cake as CakeIcon } from 'lucide-react';
+import { Music } from 'lucide-react';
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
 import CatCake from './images/cat-face-cake.jpg';
+
+const StarryNight = () => {
+  const [stars, setStars] = useState<{ top: string; left: string; opacity: number }[]>([]);
+
+  useEffect(() => {
+    // Generate random stars on component mount
+    const generateStars = () => {
+      let newStars: { top: string; left: string; opacity: number }[] = [];
+      for (let i = 0; i < 100; i++) {
+        newStars.push({
+          top: `${Math.random() * 100}vh`,        // Random vertical position
+          left: `${Math.random() * 100}vw`,       // Random horizontal position
+          opacity: Math.random(),                 // Random opacity
+        });
+      }
+      setStars(newStars);
+    };
+
+    // Call the function to generate stars
+    generateStars();
+  }, []);
+
+  return (
+    <div className="absolute inset-0">
+      {stars.map((star, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-white"
+          style={{
+            top: star.top,
+            left: star.left,
+            width: `${Math.random() * 2 + 1}px`,   // Random size for stars
+            height: `${Math.random() * 2 + 1}px`,
+            opacity: star.opacity,                 // Apply random opacity to each star
+            animation: 'twinkle 1.5s infinite ease-in-out', // Add a twinkling effect
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const Surprise = () => {
   const [stage, setStage] = useState(0);
@@ -38,6 +79,9 @@ const Surprise = () => {
       className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-pink-100 to-purple-100' : 'bg-gray-900'
         }`}
     >
+      {/* Starry Night Background */}
+      <StarryNight />
+
       {/* Decorative Bulbs */}
       {isLit && (
         <div className="absolute top-4 left-0 right-0 flex justify-around">
@@ -81,31 +125,20 @@ const Surprise = () => {
               animate={{
                 bottom: '120vh',
                 left: `${Math.random() * 100}vw`,
-                rotate: `${Math.random() * 20 - 10}deg`, // Slight rotation for variety
               }}
               transition={{
-                duration: 10 + Math.random() * 5, // Randomized speed for fun movement
+                duration: 10 + Math.random() * 5,
                 repeat: Infinity,
                 delay: i * 0.2,
               }}
             >
-              {/* Create balloons with randomized colors and sizes */}
               <div
-                className="rounded-full"
+                className="w-6 md:w-8 h-8 md:h-12 rounded-t-full"
                 style={{
-                  backgroundColor: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#9b59b6'][i % 5], // Random color
-                  width: `${Math.random() * 30 + 20}px`, // Random width between 20px and 50px
-                  height: `${Math.random() * 30 + 30}px`, // Random height between 30px and 60px
-                  boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)', // Balloon glow effect
+                  backgroundColor: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'][i % 4],
                 }}
               />
-              <div
-                className="w-0.5 h-12 md:h-16 mx-auto"
-                style={{
-                  backgroundColor: 'gray',
-                  transform: `rotate(${Math.random() * 10 - 5}deg)`, // Add random slight rotation to the string
-                }}
-              />
+              <div className="w-0.5 h-12 md:h-16 bg-gray-400 mx-auto" />
             </motion.div>
           ))}
         </div>
@@ -159,6 +192,7 @@ const Surprise = () => {
           {buttonLabels[stage]}
         </motion.button>
       </div>
+
     </div>
   );
 };
