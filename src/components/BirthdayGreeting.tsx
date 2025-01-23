@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Sparkles } from 'lucide-react';
+import Confetti from 'react-confetti';
 
 const messages = [
   "Hello Khadijah,",
@@ -14,6 +15,7 @@ const BirthdayGreeting = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [showButtons, setShowButtons] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false); // Confetti state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +34,7 @@ const BirthdayGreeting = () => {
   const handleButtonClick = () => {
     setShowButtons(false);
     setShowFinalMessage(true);
+    setShowConfetti(true); // Trigger confetti
     setTimeout(() => {
       navigate('/surprise');
     }, 3000);
@@ -39,6 +42,8 @@ const BirthdayGreeting = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-300 to-pink-400 flex items-center justify-center relative overflow-hidden">
+      {showConfetti && <Confetti />}
+
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -95,15 +100,15 @@ const BirthdayGreeting = () => {
                 >
                   <button
                     onClick={handleButtonClick}
-                    className="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transform hover:scale-105 transition-all"
+                    className="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transform hover:scale-110 transition-all"
                   >
                     Yes! Show me!
                   </button>
                   <button
                     onClick={handleButtonClick}
-                    className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-105 transition-all"
+                    className="px-6 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transform hover:scale-110 transition-all"
                   >
-                    No, I'm curious
+                    I'm curious, reveal it!
                   </button>
                 </motion.div>
               )}
@@ -116,9 +121,7 @@ const BirthdayGreeting = () => {
               transition={{ duration: 1, ease: 'easeInOut' }}
               className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl text-center"
             >
-              <motion.p
-                className="text-2xl font-semibold text-gray-800 mb-6"
-              >
+              <motion.p className="text-2xl font-semibold text-gray-800 mb-6">
                 Have a look at it, Khadijah! 🎉✨
               </motion.p>
             </motion.div>
