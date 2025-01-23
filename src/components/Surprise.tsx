@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { Music, Cake as CakeIcon } from 'lucide-react';
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
-import CatCake from './images/cat-face-cake.jpg'
+import CatCake from './images/cat-face-cake.jpg';
+import KhadijahImage from './images/khadijah.jpg'; // You can use a personalized image
+
 const Surprise = () => {
   const [stage, setStage] = useState(0);
   const [isLit, setIsLit] = useState(false);
@@ -14,10 +16,10 @@ const Surprise = () => {
   const buttonLabels = [
     "Lights On",
     "Play Music",
-    "Decorate",
+    "Decorate the Room",
     "Fly the Balloons",
-    "Let's Cut the Cake Mam :)",
-    "Well, I Have a Message for Khadijah"
+    "Let's Cut the Cake, Khadijah :)",
+    "A Special Message for You"
   ];
 
   const handleClick = () => {
@@ -34,10 +36,10 @@ const Surprise = () => {
 
   return (
     <div
-      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-pink-100 to-purple-100' : 'bg-gray-900'
+      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-purple-300 to-pink-300' : 'bg-gray-900'
         }`}
     >
-      {/* Decorative Bulbs */}
+      {/* Decorative Lights */}
       {isLit && (
         <div className="absolute top-4 left-0 right-0 flex justify-around">
           {[...Array(8)].map((_, i) => (
@@ -132,12 +134,28 @@ const Surprise = () => {
         </motion.div>
       )}
 
+      {/* Personalized Picture */}
+      {stage >= 2 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-4 right-4"
+        >
+          <img
+            src={KhadijahImage}
+            className="w-16 h-16 rounded-full border-4 border-white shadow-md"
+            alt="Khadijah"
+          />
+        </motion.div>
+      )}
+
       {/* Control Button Container */}
       <div className="absolute inset-x-0 flex justify-center items-center px-4 mt-20 py-4">
         <motion.button
           onClick={handleClick}
           className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base text-white font-semibold shadow-lg w-full max-w-sm ${isLit
-              ? 'bg-pink-500 hover:bg-pink-600'
+              ? 'bg-purple-500 hover:bg-purple-600'
               : 'bg-blue-500 hover:bg-blue-600'
             }`}
           whileHover={{ scale: 1.05 }}
