@@ -5,7 +5,6 @@ import { Music, Cake as CakeIcon } from 'lucide-react';
 import Banner from './images/banner.png';
 import Musicc from './musicc.mp3';
 import CatCake from './images/cat-face-cake.jpg';
-import KhadijahImage from './images/khadijah.jpg'; // You can use a personalized image
 
 const Surprise = () => {
   const [stage, setStage] = useState(0);
@@ -16,10 +15,10 @@ const Surprise = () => {
   const buttonLabels = [
     "Lights On",
     "Play Music",
-    "Decorate the Room",
+    "Decorate",
     "Fly the Balloons",
-    "Let's Cut the Cake, Khadijah :)",
-    "A Special Message for You"
+    "Let's Cut the Cake Mam :)",
+    "Well, I Have a Message for Khadijah"
   ];
 
   const handleClick = () => {
@@ -36,10 +35,10 @@ const Surprise = () => {
 
   return (
     <div
-      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-purple-300 to-pink-300' : 'bg-gray-900'
+      className={`min-h-screen relative overflow-hidden transition-all duration-1000 ${isLit ? 'bg-gradient-to-br from-pink-100 to-purple-100' : 'bg-gray-900'
         }`}
     >
-      {/* Decorative Lights */}
+      {/* Decorative Bulbs */}
       {isLit && (
         <div className="absolute top-4 left-0 right-0 flex justify-around">
           {[...Array(8)].map((_, i) => (
@@ -82,20 +81,31 @@ const Surprise = () => {
               animate={{
                 bottom: '120vh',
                 left: `${Math.random() * 100}vw`,
+                rotate: `${Math.random() * 20 - 10}deg`, // Slight rotation for variety
               }}
               transition={{
-                duration: 10 + Math.random() * 5,
+                duration: 10 + Math.random() * 5, // Randomized speed for fun movement
                 repeat: Infinity,
                 delay: i * 0.2,
               }}
             >
+              {/* Create balloons with randomized colors and sizes */}
               <div
-                className="w-6 md:w-8 h-8 md:h-12 rounded-t-full"
+                className="rounded-full"
                 style={{
-                  backgroundColor: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'][i % 4],
+                  backgroundColor: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#9b59b6'][i % 5], // Random color
+                  width: `${Math.random() * 30 + 20}px`, // Random width between 20px and 50px
+                  height: `${Math.random() * 30 + 30}px`, // Random height between 30px and 60px
+                  boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)', // Balloon glow effect
                 }}
               />
-              <div className="w-0.5 h-12 md:h-16 bg-gray-400 mx-auto" />
+              <div
+                className="w-0.5 h-12 md:h-16 mx-auto"
+                style={{
+                  backgroundColor: 'gray',
+                  transform: `rotate(${Math.random() * 10 - 5}deg)`, // Add random slight rotation to the string
+                }}
+              />
             </motion.div>
           ))}
         </div>
@@ -134,28 +144,12 @@ const Surprise = () => {
         </motion.div>
       )}
 
-      {/* Personalized Picture */}
-      {stage >= 2 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-4 right-4"
-        >
-          <img
-            src={KhadijahImage}
-            className="w-16 h-16 rounded-full border-4 border-white shadow-md"
-            alt="Khadijah"
-          />
-        </motion.div>
-      )}
-
       {/* Control Button Container */}
       <div className="absolute inset-x-0 flex justify-center items-center px-4 mt-20 py-4">
         <motion.button
           onClick={handleClick}
           className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base text-white font-semibold shadow-lg w-full max-w-sm ${isLit
-              ? 'bg-purple-500 hover:bg-purple-600'
+              ? 'bg-pink-500 hover:bg-pink-600'
               : 'bg-blue-500 hover:bg-blue-600'
             }`}
           whileHover={{ scale: 1.05 }}
@@ -165,7 +159,6 @@ const Surprise = () => {
           {buttonLabels[stage]}
         </motion.button>
       </div>
-
     </div>
   );
 };
